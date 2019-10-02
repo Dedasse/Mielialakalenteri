@@ -3,10 +3,13 @@ package com.example.mielialakalenteri;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
         }else if (view==findViewById(R.id.really_bad)) {
             getterSetter.setPref(this, "verybad");
             imageUpdate();
+        }else if(view==findViewById(R.id.button)){
+            Intent intent=new Intent(this,Main2Activity.class);
+            Context context=getApplicationContext();
+
+            startActivity(intent);
         }
+
     }
 
     public void imageUpdate(){
