@@ -21,13 +21,13 @@ public class GetterSetter  {
 
 
     public String getPref(Context context){
-        SharedPreferences preferences=context.getSharedPreferences(String.valueOf(date), Context.MODE_PRIVATE);
+        SharedPreferences preferences=context.getSharedPreferences("appdata", Context.MODE_PRIVATE);
         String save=preferences.getString(String.valueOf(date),"");
         return  save;
     }
 
     public  void setPref(Context context,String x){
-        SharedPreferences preferences=context.getSharedPreferences(String.valueOf(date), Context.MODE_PRIVATE);
+        SharedPreferences preferences=context.getSharedPreferences("appdata", Context.MODE_PRIVATE);
         preferences.edit().putString(String.valueOf(LocalDate.now()),x).commit();
     }
 
