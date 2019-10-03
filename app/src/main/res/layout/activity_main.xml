@@ -10,25 +10,23 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_marginStart="135dp"
+        android:layout_marginBottom="400dp"
+        android:layout_marginStart="56dp"
         android:onClick="onClickBtn"
         android:text="Muistikirja"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
-        android:layout_marginStart="1dp"
+        android:layout_marginBottom="400dp"
+        android:layout_marginEnd="66dp"
         android:onClick="onClickBtn"
         android:text="Historia"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -43,16 +41,38 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="226dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="489dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Your day:"
         android:textAlignment="center"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TimePicker
+        android:id="@+id/timepicker"
+        android:layout_width="0dp"
+        android:layout_height="115dp"
+        android:layout_marginBottom="284dp"
+        android:padding="10dp"
+        android:timePickerMode="spinner"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="224dp"
+        android:layout_marginEnd="163dp"
+        android:onClick="onClickBtn"
+        android:text="SetAlarm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
