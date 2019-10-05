@@ -96,15 +96,16 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent=new Intent(MainActivity.this,MyBroadcaster.class);
         PendingIntent pendingIntent=PendingIntent.getBroadcast(MainActivity.this,24444,intent,0);
-        intent.putExtra("mode",0);
+        intent.putExtra("mode",1);
         alarmManager.set(AlarmManager.RTC_WAKEUP,cal_alarm.getTimeInMillis(),pendingIntent);
+
     }
 
     public void cancelAlarm(){
         AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent intent=new Intent(MainActivity.this,MyBroadcaster.class);
         PendingIntent pendingIntent=PendingIntent.getBroadcast(MainActivity.this,24444,intent,0);
-        intent.putExtra("mode",1);
+        myBroadcaster.stopPlaying();
         alarmManager.cancel(pendingIntent);
     }
 

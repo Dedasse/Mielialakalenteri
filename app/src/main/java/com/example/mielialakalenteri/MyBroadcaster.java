@@ -1,6 +1,6 @@
 package com.example.mielialakalenteri;
 
-import android.app.AlarmManager;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,19 +13,24 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 
 import com.example.mielialakalenteri.R;
 
+import java.util.concurrent.TimeUnit;
 
 
-public class MyBroadcaster extends BroadcastReceiver{
+public class MyBroadcaster extends BroadcastReceiver {
 
     Notification noti;
     Uri notif;
-
+    private static Ringtone r;
     @Override
     public void onReceive(Context context, Intent intent){
+
         int mode=intent.getIntExtra("mode",0);
+        Log.d("AMAMAMA",""+mode);
+
         Vibrator vibrator=(Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(VibrationEffect.createOneShot(200,VibrationEffect.DEFAULT_AMPLITUDE));
 
@@ -52,11 +57,7 @@ public class MyBroadcaster extends BroadcastReceiver{
         //NotificationManager manager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         noti.flags=Notification.FLAG_AUTO_CANCEL;
         manager.notify(0,noti);
-        if(mode==0){
-        startPlaying(context);
-        }else {
-            stopPlaying(context);
-        }
+       startPlaying(context);
 
     }
 
@@ -64,14 +65,14 @@ public class MyBroadcaster extends BroadcastReceiver{
     public void startPlaying(Context context){
         Uri notif= RingtoneManager.getActualDefaultRingtoneUri(context,RingtoneManager.TYPE_ALARM);
 
-        Ringtone r=RingtoneManager.getRingtone(context,notif);
+        r=RingtoneManager.getRingtone(context,notif);
         r.play();
     }
 
-    public void stopPlaying(Context context){
-        Uri notif= RingtoneManager.getActualDefaultRingtoneUri(context,RingtoneManager.TYPE_ALARM);
+    public void stopPlaying(){
 
-        Ringtone r=RingtoneManager.getRingtone(context,notif);
+       // Uri notif= RingtoneManager.getActualDefaultRingtoneUri(context,RingtoneManager.TYPE_ALARM);
+       // r=RingtoneManager.getRingtone(context,notif);
         r.stop();
     }
 
