@@ -8,6 +8,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 
 import android.text.format.DateFormat;
@@ -24,23 +26,15 @@ import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
-    int mHour;
-    int mMinute;
+    private int mHour;
+    private int mMinute;
     GetterSetter getterSetter;
+    MyBroadcaster myBroadcaster;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TimePicker timePicker=(TimePicker)findViewById(R.id.timepicker);
-        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hour, int minute) {
 
-                mHour=hour;
-                mMinute=minute;
-                Log.d("FUUCK",""+minute);
-            }
-        });
         getterSetter=new GetterSetter(this);
         String save=getterSetter.getPref(this);
 
@@ -75,11 +69,14 @@ public class MainActivity extends AppCompatActivity {
         }else if(view==findViewById(R.id.button2)){
             setTimer(view);
 
+        }else if(view==findViewById(R.id.button4)){
+            cancelAlarm();
         }
 
     }
 
     public void setTimer(View view){
+        TimePicker timePicker=(TimePicker)findViewById(R.id.timePicker);
         AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Date date=new Date();
 
@@ -87,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
         Calendar cal_now=Calendar.getInstance();
 
         cal_now.setTime(date);
-        cal_alarm.setTime(date);
+        mHour=timePicker.getHour();
+        mMinute=timePicker.getMinute();
         cal_alarm.set(Calendar.HOUR_OF_DAY,mHour);
         cal_alarm.set(Calendar.MINUTE,mMinute);
         cal_alarm.set(Calendar.SECOND,0);
@@ -98,8 +96,16 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent=new Intent(MainActivity.this,MyBroadcaster.class);
         PendingIntent pendingIntent=PendingIntent.getBroadcast(MainActivity.this,24444,intent,0);
+        intent.putExtra("mode",0);
         alarmManager.set(AlarmManager.RTC_WAKEUP,cal_alarm.getTimeInMillis(),pendingIntent);
+    }
 
+    public void cancelAlarm(){
+        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Intent intent=new Intent(MainActivity.this,MyBroadcaster.class);
+        PendingIntent pendingIntent=PendingIntent.getBroadcast(MainActivity.this,24444,intent,0);
+        intent.putExtra("mode",1);
+        alarmManager.cancel(pendingIntent);
     }
 
     public void imageUpdate(){

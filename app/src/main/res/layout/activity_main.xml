@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TimePicker
-        android:id="@+id/timepicker"
+        android:id="@+id/timePicker"
         android:layout_width="0dp"
         android:layout_height="115dp"
         android:layout_marginBottom="284dp"
@@ -73,6 +73,17 @@
         android:layout_marginEnd="163dp"
         android:onClick="onClickBtn"
         android:text="SetAlarm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="170dp"
+        android:layout_marginBottom="169dp"
+        android:onClick="onClickBtn"
+        android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
