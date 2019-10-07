@@ -10,8 +10,8 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
         android:layout_marginBottom="400dp"
-        android:layout_marginStart="56dp"
         android:onClick="onClickBtn"
         android:text="Muistikirja"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,8 +21,8 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="400dp"
-        android:layout_marginEnd="66dp"
         android:onClick="onClickBtn"
         android:text="Historia"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,4 +86,14 @@
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:onClick="onClickBtn"
+        android:text="Reevaluate"
+        app:layout_constraintBottom_toTopOf="@+id/timePicker"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

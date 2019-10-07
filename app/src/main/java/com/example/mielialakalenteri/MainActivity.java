@@ -28,6 +28,8 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
     private int mHour;
     private int mMinute;
+    TimePicker timePicker;
+    AlarmManager alarmManager;
     GetterSetter getterSetter;
     MyBroadcaster myBroadcaster;
     @Override
@@ -71,13 +73,17 @@ public class MainActivity extends AppCompatActivity {
 
         }else if(view==findViewById(R.id.button4)){
             cancelAlarm();
+        }else if(view==findViewById(R.id.button5)){
+            setContentView(R.layout.your_day);
+        }else if(view==findViewById(R.id.button3)){
+            setContentView(R.layout.notepad);
         }
 
     }
 
     public void setTimer(View view){
-        TimePicker timePicker=(TimePicker)findViewById(R.id.timePicker);
-        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        timePicker=(TimePicker)findViewById(R.id.timePicker);
+        alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Date date=new Date();
 
         Calendar cal_alarm=Calendar.getInstance();
@@ -95,17 +101,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Intent intent=new Intent(MainActivity.this,MyBroadcaster.class);
+        intent.putExtra("extra","yes");
         PendingIntent pendingIntent=PendingIntent.getBroadcast(MainActivity.this,24444,intent,0);
-        intent.putExtra("mode",1);
+
         alarmManager.set(AlarmManager.RTC_WAKEUP,cal_alarm.getTimeInMillis(),pendingIntent);
 
     }
 
     public void cancelAlarm(){
-        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent intent=new Intent(MainActivity.this,MyBroadcaster.class);
+        intent.putExtra("extra","no");
+        sendBroadcast(intent);
         PendingIntent pendingIntent=PendingIntent.getBroadcast(MainActivity.this,24444,intent,0);
-        myBroadcaster.stopPlaying();
+
         alarmManager.cancel(pendingIntent);
     }
 
@@ -116,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         String aa= getterSetter.getPref(this);
         imageView.setImageResource(getImageId(this,aa));
 
-        textView.setText("Feeling: "+aa);
+        textView.setText("Feeling: ");
 
     }
 

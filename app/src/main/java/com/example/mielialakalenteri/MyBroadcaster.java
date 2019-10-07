@@ -22,14 +22,15 @@ import java.util.concurrent.TimeUnit;
 
 public class MyBroadcaster extends BroadcastReceiver {
 
+    int x;
     Notification noti;
-    Uri notif;
+    private static Uri notif;
     private static Ringtone r;
     @Override
     public void onReceive(Context context, Intent intent){
 
-        int mode=intent.getIntExtra("mode",0);
-        Log.d("AMAMAMA",""+mode);
+        String state=intent.getExtras().getString("extra");
+        Log.d("AMAMAMA",""+state);
 
         Vibrator vibrator=(Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(VibrationEffect.createOneShot(200,VibrationEffect.DEFAULT_AMPLITUDE));
@@ -38,11 +39,8 @@ public class MyBroadcaster extends BroadcastReceiver {
         String channelname="ANDROID CHANNEL";
         NotificationChannel channelID=new NotificationChannel(channelId,channelname,NotificationManager.IMPORTANCE_DEFAULT);
         channelID.enableLights(true);
-        // Sets whether notification posted to this channel should vibrate.
         channelID.enableVibration(true);
-        // Sets the notification light color for notifications posted to this channel
         channelID.setLightColor(Color.GREEN);
-        // Sets whether notifications posted to this channel appear on the lockscreen or not
         channelID.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
 
         NotificationManager manager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -57,23 +55,25 @@ public class MyBroadcaster extends BroadcastReceiver {
         //NotificationManager manager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         noti.flags=Notification.FLAG_AUTO_CANCEL;
         manager.notify(0,noti);
-       startPlaying(context);
-
+        if (state.equals("yes")) {
+            startPlaying(context);
+            int x=1;
+        }else if(state.equals("no")&&  (x==1)){
+            stopPlaying(context);
+        }
     }
 
 
     public void startPlaying(Context context){
-        Uri notif= RingtoneManager.getActualDefaultRingtoneUri(context,RingtoneManager.TYPE_ALARM);
+         notif= RingtoneManager.getActualDefaultRingtoneUri(context,RingtoneManager.TYPE_ALARM);
 
         r=RingtoneManager.getRingtone(context,notif);
         r.play();
     }
 
-    public void stopPlaying(){
-
-       // Uri notif= RingtoneManager.getActualDefaultRingtoneUri(context,RingtoneManager.TYPE_ALARM);
-       // r=RingtoneManager.getRingtone(context,notif);
+    public void stopPlaying(Context context){
         r.stop();
+
     }
 
 }
