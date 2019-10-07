@@ -4,15 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.os.Bundle;
 
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -20,9 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -49,34 +45,47 @@ public class MainActivity extends AppCompatActivity {
     public void onClickBtn(View view) {
 
         if (view == findViewById(R.id.great)) {
-            getterSetter.setPref(this,"great");
+            getterSetter.setPref(this,"great,");
             imageUpdate();
         } else if (view== findViewById(R.id.good)) {
-            getterSetter.setPref(this,"good");
+            getterSetter.setPref(this,"good,");
             imageUpdate();
         }else if (view==findViewById(R.id.ok)) {
-            getterSetter.setPref(this,"ok");
+            getterSetter.setPref(this,"ok,");
             imageUpdate();
         }else if (view==findViewById(R.id.bad)) {
-            getterSetter.setPref(this, "bad");
+            getterSetter.setPref(this, "bad,");
             imageUpdate();
         }else if (view==findViewById(R.id.really_bad)) {
-            getterSetter.setPref(this, "verybad");
+            getterSetter.setPref(this, "verybad,");
             imageUpdate();
-        }else if(view==findViewById(R.id.button)){
+        }else if(view==findViewById(R.id.history)){
             Intent intent=new Intent(this,Main2Activity.class);
             Context context=getApplicationContext();
 
             startActivity(intent);
-        }else if(view==findViewById(R.id.button2)){
+        }else if(view==findViewById(R.id.setalarm)){
             setTimer(view);
 
-        }else if(view==findViewById(R.id.button4)){
+        }else if(view==findViewById(R.id.cancel)){
             cancelAlarm();
-        }else if(view==findViewById(R.id.button5)){
+        }else if(view==findViewById(R.id.revaluate)){
             setContentView(R.layout.your_day);
-        }else if(view==findViewById(R.id.button3)){
+        }else if(view==findViewById(R.id.notebook)){
             setContentView(R.layout.notepad);
+            String saved=getterSetter.getPref(this);
+            String[] savedT=saved.split(",",2);
+            TextView textView=(TextView)findViewById(R.id.descriptionEditText);
+
+            textView.setText(savedT[1]);
+        }else if (view==findViewById(R.id.Save)){
+           String save= getterSetter.getPref(this);
+           EditText nsave=findViewById(R.id.descriptionEditText);
+          String[] saveT=save.split(",",2);
+            saveT[1]=nsave.getText().toString();
+            save= Arrays.stream(saveT).collect(Collectors.joining(","));
+           getterSetter.setPref(this,save);
+           setContentView(R.layout.activity_main);
         }
 
     }
@@ -123,7 +132,8 @@ public class MainActivity extends AppCompatActivity {
         TextView textView=(TextView)findViewById(R.id.textView);
         ImageView imageView=(ImageView)findViewById(R.id.imageView);
         String aa= getterSetter.getPref(this);
-        imageView.setImageResource(getImageId(this,aa));
+        String[] image= aa.split(",",2);
+        imageView.setImageResource(getImageId(this,image[0]));
 
         textView.setText("Feeling: ");
 
