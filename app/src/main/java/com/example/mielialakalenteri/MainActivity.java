@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -76,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
             String saved=getterSetter.getPref(this);
             String[] savedT=saved.split(",",2);
             TextView textView=(TextView)findViewById(R.id.descriptionEditText);
-
+            TextView dateTxt=(TextView)findViewById(R.id.titleEditText);
+            dateTxt.setText(LocalDate.now().toString());
             textView.setText(savedT[1]);
         }else if (view==findViewById(R.id.Save)){
            String save= getterSetter.getPref(this);
