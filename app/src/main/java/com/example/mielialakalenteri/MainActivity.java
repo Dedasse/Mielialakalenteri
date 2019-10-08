@@ -39,14 +39,13 @@ public class MainActivity extends AppCompatActivity {
         getterSetter=new GetterSetter(this);
         String save=getterSetter.getPref(this);
 
-        if (save.isEmpty()) {
+        if (save.isEmpty()) {                           //jos päivältä ei vielä tallennusta mennään päivän arvostelu sivulle
             setContentView(R.layout.your_day);
         }else{
         imageUpdate();}
 
     }
-    public void onClickBtn(View view) {
-
+    public void onClickBtn(View view) {             //Button controlleri
         if (view == findViewById(R.id.great)) {
             getterSetter.setPref(this,"great,");
             imageUpdate();
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             getterSetter.setPref(this, "verybad,");
             imageUpdate();
         }else if(view==findViewById(R.id.history)){
-            Intent intent=new Intent(this,Main2Activity.class);
+            Intent intent=new Intent(this,Main2Activity.class); //historia aliohjelman kutsu
             Context context=getApplicationContext();
             startActivity(intent);
         }else if(view==findViewById(R.id.setalarm)){
@@ -75,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
             cancelAlarm();
             Toast.makeText(this, "Alarm cancelled",
                     Toast.LENGTH_SHORT).show();
-        }else if(view==findViewById(R.id.revaluate)){
+        }else if(view==findViewById(R.id.revaluate)){           //päivän uudellen arviointi
             setContentView(R.layout.your_day);
-        }else if(view==findViewById(R.id.notebook)){
+        }else if(view==findViewById(R.id.notebook)){                //muistion lukeminen ja muistio sivulle meno
             setContentView(R.layout.notepad);
             String saved=getterSetter.getPref(this);
             String[] savedT=saved.split(",",2);
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             TextView dateTxt=(TextView)findViewById(R.id.titleEditText);
             dateTxt.setText(LocalDate.now().toString());
             textView.setText(savedT[1]);
-        }else if (view==findViewById(R.id.Save)){
+        }else if (view==findViewById(R.id.Save)){            //muistion tallentaminen
            String save= getterSetter.getPref(this);
            EditText nsave=findViewById(R.id.descriptionEditText);
           String[] saveT=save.split(",",2);

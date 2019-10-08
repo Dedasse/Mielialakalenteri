@@ -27,7 +27,7 @@ public class Main2Activity extends AppCompatActivity {
     ListView listView;
     List<String> lists;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {              //ListView tallenetuille muistikirjoille
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         prefs=getBaseContext().getSharedPreferences("appdata",MODE_PRIVATE);
@@ -37,7 +37,7 @@ public class Main2Activity extends AppCompatActivity {
         List<String>lists=new ArrayList<>();
 
 
-            Map<String, ?> allEntries = prefs.getAll();
+            Map<String, ?> allEntries = prefs.getAll();         //haetaan kaikki avaimet ja arvot
             for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
                 Log.d("map values", entry.getKey() + " : " + entry.getValue().toString());
                 String list = entry.getKey() + ": " + entry.getValue().toString();
@@ -49,7 +49,7 @@ public class Main2Activity extends AppCompatActivity {
             ListView listView = (ListView) findViewById(R.id.listview);
             listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {    //kuuntelija joka palauttaa valitun päivän ja arvon
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 setContentView(R.layout.notepad2);

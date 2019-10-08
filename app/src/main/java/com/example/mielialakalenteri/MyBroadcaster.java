@@ -33,9 +33,9 @@ public class MyBroadcaster extends BroadcastReceiver {
 
 
         Vibrator vibrator=(Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(VibrationEffect.createOneShot(200,VibrationEffect.DEFAULT_AMPLITUDE));
+        vibrator.vibrate(VibrationEffect.createOneShot(200,VibrationEffect.DEFAULT_AMPLITUDE)); //puhelin vibran luvat
 
-        String channelId="com.example.mielialakalenteri";
+        String channelId="com.example.mielialakalenteri"; //tästä alkaa notification määrittelyt
         String channelname="ANDROID CHANNEL";
         NotificationChannel channelID=new NotificationChannel(channelId,channelname,NotificationManager.IMPORTANCE_DEFAULT);
         channelID.enableLights(true);
@@ -52,10 +52,10 @@ public class MyBroadcaster extends BroadcastReceiver {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .build();
 
-        //NotificationManager manager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+
         noti.flags=Notification.FLAG_AUTO_CANCEL;
         manager.notify(0,noti);
-        if (state.equals("yes")) {
+        if (state.equals("yes")) {  //Intentin tuoma yes/no hälytys äänrn katkaisuun
             startPlaying(context);
             int x=1;
         }else if(state.equals("no")&&  (x==1)){
@@ -72,7 +72,7 @@ public class MyBroadcaster extends BroadcastReceiver {
     }
 
     public void stopPlaying(Context context){
-
+        //todo END ALARM
 
     }
 
