@@ -8,12 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -23,12 +23,14 @@ import java.util.stream.Collectors;
 
 
 public class MainActivity extends AppCompatActivity {
+
     private int mHour;
     private int mMinute;
     TimePicker timePicker;
     AlarmManager alarmManager;
     GetterSetter getterSetter;
     MyBroadcaster myBroadcaster;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)    {
         super.onCreate(savedInstanceState);
@@ -63,13 +65,16 @@ public class MainActivity extends AppCompatActivity {
         }else if(view==findViewById(R.id.history)){
             Intent intent=new Intent(this,Main2Activity.class);
             Context context=getApplicationContext();
-
             startActivity(intent);
         }else if(view==findViewById(R.id.setalarm)){
             setTimer(view);
+            Toast.makeText(this, "Alarm Set",
+                    Toast.LENGTH_SHORT).show();
 
         }else if(view==findViewById(R.id.cancel)){
             cancelAlarm();
+            Toast.makeText(this, "Alarm cancelled",
+                    Toast.LENGTH_SHORT).show();
         }else if(view==findViewById(R.id.revaluate)){
             setContentView(R.layout.your_day);
         }else if(view==findViewById(R.id.notebook)){
@@ -106,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         cal_alarm.set(Calendar.HOUR_OF_DAY,mHour);
         cal_alarm.set(Calendar.MINUTE,mMinute);
         cal_alarm.set(Calendar.SECOND,0);
-        Log.d("FUCK",""+mMinute);
+
         if(cal_alarm.before(cal_now)){
             cal_alarm.add(Calendar.DATE,1);
         }

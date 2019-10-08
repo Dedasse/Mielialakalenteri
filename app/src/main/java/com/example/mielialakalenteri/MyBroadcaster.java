@@ -30,7 +30,7 @@ public class MyBroadcaster extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent){
 
         String state=intent.getExtras().getString("extra");
-        Log.d("AMAMAMA",""+state);
+
 
         Vibrator vibrator=(Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(VibrationEffect.createOneShot(200,VibrationEffect.DEFAULT_AMPLITUDE));
@@ -72,7 +72,7 @@ public class MyBroadcaster extends BroadcastReceiver {
     }
 
     public void stopPlaying(Context context){
-        r.stop();
+
 
     }
 
