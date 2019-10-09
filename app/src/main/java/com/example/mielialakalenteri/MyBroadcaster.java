@@ -13,11 +13,12 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 
-import com.example.mielialakalenteri.R;
-
-import java.util.concurrent.TimeUnit;
+/**
+ * Luokka joka hoitaa Notifikation luomisen
+ * Vibran käyttöön oton
+ * ja ringtonemanagerin asettamisen
+ */
 
 
 public class MyBroadcaster extends BroadcastReceiver {

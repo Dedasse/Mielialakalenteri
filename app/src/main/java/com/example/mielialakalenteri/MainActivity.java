@@ -21,15 +21,22 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-
+/**
+ * Luokka sisältää mielialkalenterin pääohjelman
+ * @author Dominic Ortju,Irene Linnalahti,Mikael Ylivaara
+ * @version date 10.10.2019
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * @onClickBtn
+     */
     private int mHour;
     private int mMinute;
-    TimePicker timePicker;
-    AlarmManager alarmManager;
-    GetterSetter getterSetter;
-    MyBroadcaster myBroadcaster;
+    private TimePicker timePicker;
+    private AlarmManager alarmManager;
+    private GetterSetter getterSetter;
+    private MyBroadcaster myBroadcaster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)    {
@@ -45,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         imageUpdate();}
 
     }
+
+    /**
+     * Button kontrolleri
+     * @param view viittaa UI
+     *
+     */
     public void onClickBtn(View view) {             //Button controlleri
         if (view == findViewById(R.id.great)) {
             getterSetter.setPref(this,"great,");
@@ -96,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Hälytyksen asettelia
+     * @param view viittaa UI
+     */
     public void setTimer(View view){
         timePicker=(TimePicker)findViewById(R.id.timePicker);
         alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -123,6 +140,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Hälytyksen lopettaja
+     */
     public void cancelAlarm(){
         alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent intent=new Intent(MainActivity.this,MyBroadcaster.class);
@@ -133,6 +153,9 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.cancel(pendingIntent);
     }
 
+    /**
+     * Päänäytön päivittäjä
+     */
     public void imageUpdate(){
         setContentView(R.layout.activity_main);
         TextView textView=(TextView)findViewById(R.id.textView);
@@ -145,6 +168,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Kuvan tuoja päänäytölle
+     * @param context
+     * @param imageName kuvan nimi 5kpl
+     * @return
+     */
     public static int getImageId(Context context, String imageName) {
 
         return context.getResources().getIdentifier("drawable/" + imageName, null, context.getPackageName());

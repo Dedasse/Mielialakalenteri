@@ -19,6 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Toinen activity jonka tehtävä on listata Sharedpreferenssiin tallennetut
+ * päivämäärä avaimet ja niiden arvot/stringit
+ * lisäksi tulostaa onItemClickListenerillä valittu päivämäärä avain ja sen String
+ * toiseen ikkunaan.
+ */
 public class Main2Activity extends AppCompatActivity {
 
 
