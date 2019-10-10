@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             save= Arrays.stream(saveT).collect(Collectors.joining(","));
            getterSetter.setPref(this,save);
            setContentView(R.layout.activity_main);
+           imageUpdate();
         }
 
     }
